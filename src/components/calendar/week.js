@@ -21,7 +21,6 @@ const Week = ({week, numberOfDays, offset}) => {
     return (
 
           <Grid.Row>
-            <h6>{week}</h6>
             {displayWeek()}
           </Grid.Row>
    
