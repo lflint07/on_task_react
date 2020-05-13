@@ -1,10 +1,10 @@
 import React from 'react';
 import {Form, TextArea} from 'semantic-ui-react';
 
-const Planner = () => {
+const Planner = ({plannerDay}) => {
     return (
         <form>
-            <TextArea placeholder={"Sup"} style={{minheight: 200}} />
+            <TextArea placeholder={plannerDay} style={{minheight: 200}} />
         </form>
     )
 }

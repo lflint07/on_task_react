@@ -1,10 +1,22 @@
 import React from 'react';
-import Progress from '../components/progress';
+import {Sidebar, Segment} from 'semantic-ui-react';
+import Planner from '../components/planner';
 
-const ProgressContainer = () => {
+const PlannerContainer = ({visible, plannerDay}) => {
     return (
-        <Progress />
+        <Sidebar
+            as={Segment}
+            animation='scale down'
+            direction='left'
+            visible={visible}
+            style={{width: "50%"}}
+        >
+            <Planner plannerDay={plannerDay} />
+        </Sidebar>
     )
+
 }
 
-export default ProgressContainer
+
+
+export default PlannerContainer;

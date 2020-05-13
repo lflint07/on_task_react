@@ -1,10 +1,10 @@
 import React from 'react';
-import Planner from '../components/planner';
+import Progress from '../components/progress';
 
-const PlannerContainer = () => {
+const ProgressContainer = () => {
     return (
-        <Planner />
+        <Progress />
     )
 }
 
-export default PlannerContainer
+export default ProgressContainer

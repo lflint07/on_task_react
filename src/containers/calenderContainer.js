@@ -4,12 +4,11 @@ import ProjectContainer from './projectContainer';
 import Calender from '../components/calendar/calendar';
 
 
-const CalendarContainer = () => {
+const CalendarContainer = ({showDay}) => {
     return (
         <Fragment>
-            <Calender />
+            <Calender showDay={showDay}/>
             <GoalContainer />
-            <PlannerContainer />
             <ProjectContainer />
         </Fragment>
     )
