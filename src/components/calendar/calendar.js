@@ -17,7 +17,7 @@ const Calendar = ({showDay}) => {
 
     const displayCalender = () => {
         const currentMonth = monthArray[activePage-1]
-        return <Month month={currentMonth.month} numberOfDays={currentMonth.numberOfDays} offset={currentMonth.offset} showDay={showDay} />
+        return <Month month={currentMonth.month} monthId={activePage} numberOfDays={currentMonth.numberOfDays} offset={currentMonth.offset} showDay={showDay} />
 
     }
 
