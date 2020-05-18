@@ -1,30 +1,29 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {Form, TextArea} from 'semantic-ui-react';
 import Note from './note';
 
 
-const Planner = ({plannerDay}) => {
+const Planner = ({plannerDay, note, getNote, getNotes}) => {
     const notesURL = "http://localhost:3000/notes" //get and post
     
-    const[content, setContent] = useState("");
     
-    const newNote = () => {
+    const newNote = (content) => {
         const notesObj = {
             'method': 'POST',
             'headers': {
                 "Accept": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
-            'body': JSON.stringify({content, date:plannerDay})
+            'body': JSON.stringify({planner_id: 1,content, date:plannerDay})
         }
         
-        fetch(notesURL)
+        fetch(notesURL, notesObj)
         .then(res => res.json())
-        .then(note => setContent(note))
+        .then(note => console.log(note))
         
     }
     
-    const editNote = (noteId) => {
+    const editNote = (noteId, content) => {
         const notesURL = `http://localhost:3000/notes/${noteId}`//edit and delete
         const notesObj = {
             'method': 'PATCH',
@@ -32,24 +31,26 @@ const Planner = ({plannerDay}) => {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            'body': JSON.stringify({content, date:plannerDay})
+            'body': JSON.stringify({planner_id: 1, content, date:plannerDay})
         }
     
-        fetch(notesURL)
+        fetch(notesURL, notesObj)
             .then(res => res.json())
-            .then(note => setContent(note))
+            .then(note => console.log(note))
     }
 
-    const handleChange = () => {
-        //if (note exists) {
-          //  editNote(noteId);
-        //} else {
-          //  newNote();
-        //}
+    const handleChange = (content) => {
+        if (note) {
+           editNote(note.id, content);
+        } else {
+           newNote(content);
+           getNotes();
+           getNote(plannerDay);
+        }
     }
-
+    
     return (
-        <Note handleChange={handleChange} plannerDay={plannerDay}/>
+        <Note note={note} handleChange={handleChange} plannerDay={plannerDay} />
     )
 }
 

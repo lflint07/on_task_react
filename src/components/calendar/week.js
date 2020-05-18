@@ -2,7 +2,7 @@ import React from 'react';
 import Day from './day';
 import {Grid} from 'semantic-ui-react';
 
-const Week = ({monthId, month, week, numberOfDays, offset, showDay}) => {
+const Week = ({monthId,week, numberOfDays, offset, showDay}) => {
 
     const displayWeek = () => {
         const dayArray = [1, 2, 3, 4, 5, 6, 7];
@@ -12,7 +12,7 @@ const Week = ({monthId, month, week, numberOfDays, offset, showDay}) => {
            
            if (calendarDay <= numberOfDays && calendarDay > 0){
                return calendarDay
-        }
+                }
     };
 
     const formattedDay = (day) => {
