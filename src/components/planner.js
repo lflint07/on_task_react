@@ -1,9 +1,8 @@
 import React from 'react';
-import {Form, TextArea} from 'semantic-ui-react';
 import Note from './note';
 
 
-const Planner = ({plannerDay, note, getNote, getNotes}) => {
+const Planner = ({plannerDay, note, getNote, addNote, setCurrentNote}) => {
     const notesURL = "http://localhost:3000/notes" //get and post
     
     
@@ -19,8 +18,10 @@ const Planner = ({plannerDay, note, getNote, getNotes}) => {
         
         fetch(notesURL, notesObj)
         .then(res => res.json())
-        .then(note => console.log(note))
-        
+        .then(note => {
+            addNote(note)
+            setCurrentNote(note)
+        })
     }
     
     const editNote = (noteId, content) => {
@@ -44,13 +45,11 @@ const Planner = ({plannerDay, note, getNote, getNotes}) => {
            editNote(note.id, content);
         } else {
            newNote(content);
-           getNotes();
-           getNote(plannerDay);
         }
     }
     
     return (
-        <Note note={note} handleChange={handleChange} plannerDay={plannerDay} />
+        <Note note={note} handleChange={handleChange} plannerDay={plannerDay} setCurrentNote={setCurrentNote}/>
     )
 }
 

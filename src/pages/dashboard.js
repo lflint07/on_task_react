@@ -20,6 +20,10 @@ const Dashboard = () => {
     const [notes, setNotes] = useState([]);
     const [currentNote, setCurrentNote] = useState(null);
 
+    const addNote = (note) => {
+        setNotes(notes => [...notes, note])
+    }
+
     const getNotes = () => {
         const notesUrl = `http://localhost:3000/notes`;
         fetch(notesUrl)
@@ -28,10 +32,14 @@ const Dashboard = () => {
     };
 
     const getNote = (day) => {
-        let noteId = notes.find(note => note.date === day);
+        let noteId = notes.find(note => {
+            const noteDate = note.date.slice(0,10).replace(/-/g, "");
+            return noteDate === day
+        });
+
         if (noteId) {
             noteId=noteId.id
-            const noteUrl = `https://localhost:3000/notes/${noteId}`;
+            const noteUrl = `http://localhost:3000/notes/${noteId}`;
             fetch(noteUrl)
                 .then(res => res.json())
                 .then(note => setCurrentNote(note));
@@ -56,13 +64,15 @@ const Dashboard = () => {
         if (visible && e.target.dataset.value !== "sidebar") {
             setVisible(false);
             setDimmed(false);
+            setDay(0);
+            setCurrentNote(null);
         }
 
     }
     return ( 
     <Fragment>
         <Sidebar.Pushable as={Segment} onClick={clickOffPlanner} >
-            <PlannerContainer visible={visible} plannerDay={day} note={currentNote} getNote={getNote} getNotes={getNotes}/>
+            <PlannerContainer visible={visible} plannerDay={day} note={currentNote} allNotes={notes} setCurrentNote={setCurrentNote} getNote={getNote} setNotes={setNotes} addNote={addNote}/>
             <Sidebar.Pusher dimmed={dimmed && visible}>
                 <Segment basic >
                     <CalendarContainer showDay={handlePlanner}/>
