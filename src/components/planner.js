@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import Note from './note';
+import TaskContainer from '../containers/tasksContainer';
+import {Divider, Icon, Header} from 'semantic-ui-react';
 
 
-const Planner = ({plannerDay, note, getNote, addNote, setCurrentNote}) => {
+const Planner = ({plannerDay, note, addNote, setCurrentNote, tasks}) => {
     const notesURL = "http://localhost:3000/notes" //get and post
     
     
@@ -49,8 +51,22 @@ const Planner = ({plannerDay, note, getNote, addNote, setCurrentNote}) => {
     }
     
     return (
-        <Note note={note} handleChange={handleChange} plannerDay={plannerDay} setCurrentNote={setCurrentNote}/>
-    )
+        <Fragment>
+            <Divider horizontal>
+                <Header as='h4'>
+                    <Icon name="tasks" />
+                    Tasks
+                </Header>
+            </Divider>
+            <TaskContainer tasks={tasks}/>
+                <Divider horizontal>
+                    <Header as='h4'>
+                        <Icon name="pencil" />
+                    </Header>
+                </Divider>
+            <Note note={note} handleChange={handleChange} setCurrentNote={setCurrentNote}/>
+        </Fragment>
+        )
 }
 
 export default Planner;

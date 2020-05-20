@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Form, TextArea} from 'semantic-ui-react';
 
-const Note = ({plannerDay, handleChange,note}) => {
+const Note = ({handleChange,note}) => {
     const [content, setContent] = useState("");
 
     useEffect(() => {
